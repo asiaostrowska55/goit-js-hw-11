@@ -44,19 +44,21 @@ async function fetchGalleryImage(search) {
     lightBox.refresh();
 
     totalPages = Math.ceil(response.data.totalHits / per_page);
-
-    if (totalPages >= page) {
-      loadMoreBtn.classList.replace('btn-hidden', 'btn-visible');
-      loadMoreBtn.addEventListener('click', e => {
-        page += 1;
-        fetchGalleryImage(search);
-      });
+    if (page > 1) {
       const { height: cardHeight } =
         gallery.firstElementChild.getBoundingClientRect();
 
       window.scrollBy({
         top: cardHeight * 2,
         behavior: 'smooth',
+      });
+    }
+
+    if (totalPages >= page) {
+      loadMoreBtn.classList.replace('btn-hidden', 'btn-visible');
+      loadMoreBtn.addEventListener('click', e => {
+        page += 1;
+        fetchGalleryImage(search);
       });
     } else if (page > totalPages && page !== 1) {
       Notify.info("You've reached the end of search results");
