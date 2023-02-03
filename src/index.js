@@ -52,6 +52,7 @@ async function fetchGalleryImage(search) {
         top: cardHeight * 2,
         behavior: 'smooth',
       });
+      console.log('test');
     }
 
     if (totalPages >= page) {
