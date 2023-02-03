@@ -13,7 +13,7 @@ let page = 1;
 let per_page = 40;
 
 const lightBox = new SimpleLightbox('.gallery a');
-const axios = require('axios').default;
+// const axios = require('axios');
 
 async function fetchGalleryImage(search) {
   try {
