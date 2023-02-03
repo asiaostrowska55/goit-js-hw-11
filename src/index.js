@@ -13,7 +13,6 @@ let page = 1;
 let per_page = 40;
 
 const lightBox = new SimpleLightbox('.gallery a');
-// const axios = require('axios');
 
 async function fetchGalleryImage(search) {
   try {
@@ -44,6 +43,7 @@ async function fetchGalleryImage(search) {
     lightBox.refresh();
 
     totalPages = Math.ceil(response.data.totalHits / per_page);
+
     if (page > 1) {
       const { height: cardHeight } =
         gallery.firstElementChild.getBoundingClientRect();
