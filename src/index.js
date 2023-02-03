@@ -42,7 +42,7 @@ async function fetchGalleryImage(search) {
     }
     lightBox.refresh();
 
-    totalPages = Math.ceil(response.data.totalHits / per_page);
+    let totalPages = Math.ceil(response.data.totalHits / per_page);
 
     if (page > 1) {
       const { height: cardHeight } =
