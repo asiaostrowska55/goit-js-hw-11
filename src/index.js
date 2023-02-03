@@ -42,9 +42,25 @@ async function fetchGalleryImage(search) {
     }
     lightBox.refresh();
 
-    let totalPages = Math.ceil(response.data.totalHits / per_page);
+    totalPages = Math.ceil(response.data.totalHits / per_page);
 
-    if (page > 1) {
+    // if (page > 1) {
+    //   const { height: cardHeight } =
+    //     gallery.firstElementChild.getBoundingClientRect();
+
+    //   window.scrollBy({
+    //     top: cardHeight * 2,
+    //     behavior: 'smooth',
+    //   });
+    //   console.log('test');
+    // }
+
+    if (totalPages >= page) {
+      loadMoreBtn.classList.replace('btn-hidden', 'btn-visible');
+      loadMoreBtn.addEventListener('click', e => {
+        page += 1;
+        fetchGalleryImage(search);
+      });
       const { height: cardHeight } =
         gallery.firstElementChild.getBoundingClientRect();
 
@@ -53,14 +69,6 @@ async function fetchGalleryImage(search) {
         behavior: 'smooth',
       });
       console.log('test');
-    }
-
-    if (totalPages >= page) {
-      loadMoreBtn.classList.replace('btn-hidden', 'btn-visible');
-      loadMoreBtn.addEventListener('click', e => {
-        page += 1;
-        fetchGalleryImage(search);
-      });
     } else if (page > totalPages && page !== 1) {
       Notify.info("You've reached the end of search results");
       loadMoreBtn.disabled = true;
